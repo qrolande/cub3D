@@ -118,7 +118,7 @@ int main(int ac, char **av)
 //	int y = -1;
 
 	if (ac < 2)
-		error_out(0);
+		ft_exit("Error: not enough arguments", 2, &cub);
 	if (ac == 2)
 	{
 		init_mem(&cub, 0);
@@ -143,6 +143,6 @@ int main(int ac, char **av)
 //		mlx_loop(cub.win->mlx);
 	}
 	else
-		error_out(2);
+		ft_exit("Error: arguments more than 2", 2, &cub);
 	return  (0);
 }

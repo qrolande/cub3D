@@ -10,5 +10,5 @@ void    init_mem(t_cub *cub, int flag)
 		cub->map = malloc(sizeof(t_map));
 	}
 	if (!cub->plr || !cub->map || !cub->win || !cub->keys)
-		error_out(1);
+		ft_exit("Error: can't allocate memory", 1, cub);
 }

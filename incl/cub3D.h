@@ -56,7 +56,7 @@ typedef struct  s_map
 	char	    *west_wall;
 	char	    *east_wall;
 	char	    *map_floor;
-	char	    *map_ceil;
+	char	    *map_sky;
 	char	    start;
 	int		    numb_color;
 	int		    numb_commas;
@@ -82,12 +82,14 @@ typedef struct  s_cub
 	t_keys	    *keys;
 }				t_cub;
 
-void	parser(char **av, t_cub *cub);
-int	    key_unpress(int keycode, t_cub *cub);
-int	    key_press(int keycode, t_cub *cub);
 int     end_game(t_cub *cub);
+void    validator(t_cub *cub);
 int     game_begin(t_cub *cub);
-void    error_out(int flag);
+void	parser(char **av, t_cub *cub);
 void    init_mem(t_cub *cub, int flag);
+int	    key_press(int keycode, t_cub *cub);
+int	    key_unpress(int keycode, t_cub *cub);
+void    ft_exit(char *str, int flag, t_cub *cub);
+void    texture_and_color_parser(t_cub *cub, int i);
 
 #endif

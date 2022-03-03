@@ -1,11 +1,11 @@
 #include "../incl/cub3D.h"
 
-static void	check_valid_file(char *str)
+static void	check_valid_file(char *str, t_cub *cub)
 {
     while (*str && *str != '.')
         str++;
     if (ft_strncmp(str, ".cub", 4))
-        error_out(3);
+	    ft_exit("Error: invalid map extension", 1, cub);
 }
 
 static void save_map(t_map *map, char *str, int i)
@@ -25,7 +25,7 @@ static void save_map(t_map *map, char *str, int i)
 	close(map->fd);
 }
 
-static void read_file(t_map *map, char *str)
+static void read_file(t_cub *cub, char *str)
 {
 	char    *line;
 	int     gnl;
@@ -33,21 +33,21 @@ static void read_file(t_map *map, char *str)
 
 	line = NULL;
 	i = 0;
-	map->fd = open(str, O_DIRECTORY);
-	if (map->fd != -1)
-		error_out((4));
-	map->fd = open(str, O_RDONLY);
-	if (map->fd == -1)
-		error_out((4));
-	gnl = get_next_line(map->fd, &line);
+	cub->map->fd = open(str, O_DIRECTORY);
+	if (cub->map->fd != -1)
+		ft_exit("Error: can't open file", 1, cub);
+	cub->map->fd = open(str, O_RDONLY);
+	if (cub->map->fd == -1)
+		ft_exit("Error: can't open file", 1, cub);
+	gnl = get_next_line(cub->map->fd, &line);
 	while (gnl)
 	{
 		free(line);
-		gnl = get_next_line(map->fd, &line);
+		gnl = get_next_line(cub->map->fd, &line);
 		i++;
 	}
 	free(line);
-	save_map(map, str, i);
+	save_map(cub->map, str, i);
 }
 
 void	parser(char **av, t_cub *cub)
@@ -58,9 +58,10 @@ void	parser(char **av, t_cub *cub)
 	cub->map->west_wall = NULL;
 	cub->map->east_wall = NULL;
 	cub->map->map_floor = NULL;
-	cub->map->map_ceil = NULL;
+	cub->map->map_sky = NULL;
 	cub->map->x_len = 0;
 	cub->map->y_len = 0;
-    check_valid_file(av[1]);
-    read_file(cub->map, av[1]);
+    check_valid_file(av[1], cub);
+    read_file(cub, av[1]);
+	validator(cub);
 }
