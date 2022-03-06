@@ -1,16 +1,7 @@
 #include "../incl/cub3D.h"
 
-static void free_all(t_cub *cub)
+static void other_close(t_cub *cub)
 {
-	int i;
-
-	i = -1;
-	if (cub->map->map && cub->map->y_len > 0)
-	{
-		while (++i <= cub->map->y_len)
-			free(cub->map->map[i]);
-		free(cub->map->map);
-	}
 	if (cub->map->east_wall)
 		free(cub->map->east_wall);
 	if (cub->map->west_wall)
@@ -23,6 +14,27 @@ static void free_all(t_cub *cub)
 		free(cub->map->map_sky);
 	if (cub->map->map_floor)
 		free(cub->map->map_floor);
+}
+
+static void free_all(t_cub *cub)
+{
+	int i;
+
+	i = -1;
+	if (cub->map->file && cub->map->file_len > 0)
+	{
+		while (++i < cub->map->y_len)
+			free(cub->map->file[i]);
+		free(cub->map->file);
+	}
+	i = -1;
+	if (cub->map->map && cub->map->file_len > 0)
+	{
+		while (++i < cub->map->y_len)
+			free(cub->map->map[i]);
+		free(cub->map->map);
+	}
+	other_close(cub);
 }
 
 void    ft_exit(char *str, int flag, t_cub *cub)

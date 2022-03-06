@@ -1,13 +1,21 @@
-NO ./sprites/wall4.xpm
-SO ./sprites/wall1.xpm
-WE ./sprites/wall3.xpm
-EA ./sprites/wall5.xpm
+    WE ./sprites/wall3.xpm
+    NO ./sprites/wall4.xpm
+    SO ./sprites/wall1.xpm
+  EA ./sprites/wall5.xpm
 
-F 0,5,73
+
 C 142,200,216
+   F 0,5,73
 
+
+11111111111111
+ 1110S001  101
+11000011111111
+1001011
 111111
-100001
-10T001
-100101
-111111
+1
+
+111
+
+
+111

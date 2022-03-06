@@ -1,67 +1,92 @@
 #include "../incl/cub3D.h"
 
-static void	check_valid_file(char *str, t_cub *cub)
+int check_line(char *line)
 {
-    while (*str && *str != '.')
-        str++;
-    if (ft_strncmp(str, ".cub", 4))
-	    ft_exit("Error: invalid map extension", 1, cub);
+	int j;
+
+	j = 0;
+	if (line[j] == ' ' || !line[j])
+	{
+		while (line[j] == ' ')
+			j++;
+		if (!line[j])
+			return (-1);
+	}
+	return (j);
 }
 
 static void save_map(t_map *map, char *str, int i)
 {
-	char    *line;
-
-	line = NULL;
-	map->map = malloc(sizeof(char *) * (i + 2));
+	map->file = malloc(sizeof(char *) * (i + 2));
 	map->fd = open(str, O_RDONLY);
-	while (get_next_line(map->fd, &line))
-	{
-		map->map[map->y_len] = line;
-		map->y_len++;
-	}
-	map->map[map->y_len + 1] = NULL;
-	free(line);
-	close(map->fd);
+	gnl_work(map);
 }
 
-static void read_file(t_cub *cub, char *str)
+static void read_file(t_cub *cub, char *str, int i)
 {
 	char    *line;
 	int     gnl;
-	int		i;
 
 	line = NULL;
-	i = 0;
 	cub->map->fd = open(str, O_DIRECTORY);
 	if (cub->map->fd != -1)
 		ft_exit("Error: can't open file", 1, cub);
 	cub->map->fd = open(str, O_RDONLY);
 	if (cub->map->fd == -1)
 		ft_exit("Error: can't open file", 1, cub);
-	gnl = get_next_line(cub->map->fd, &line);
+	gnl = 1;
 	while (gnl)
 	{
-		free(line);
 		gnl = get_next_line(cub->map->fd, &line);
+		if (check_line(line) == -1 && i < 7)
+		{
+			free(line);
+			continue;
+		}
+		free(line);
 		i++;
 	}
-	free(line);
 	save_map(cub->map, str, i);
 }
 
-void	parser(char **av, t_cub *cub)
+static void init_struct_map(t_cub *cub)
 {
 	cub->map->map = NULL;
+	cub->map->file = NULL;
 	cub->map->north_wall = NULL;
 	cub->map->south_wall = NULL;
 	cub->map->west_wall = NULL;
 	cub->map->east_wall = NULL;
 	cub->map->map_floor = NULL;
 	cub->map->map_sky = NULL;
+	cub->map->temp = NULL;
+	cub->map->res = 0;
+	cub->map->file_len = 0;
+	cub->map->player = 0;
 	cub->map->x_len = 0;
 	cub->map->y_len = 0;
-    check_valid_file(av[1], cub);
-    read_file(cub, av[1]);
-	validator(cub);
+}
+
+void	parser(char **av, t_cub *cub)
+{
+	int i;
+
+	i = 0;
+	init_struct_map(cub);
+	while (av[1] && av[1][i] != '.')
+		i++;
+	if (ft_strncmp(av[1] + i, ".cub", 4))
+		ft_exit("Error: invalid map extension", 1, cub);
+    read_file(cub, av[1], 0);
+	work_with_map(cub);
+	texture_and_color_parser(cub, cub->map, -1);
+	floor_and_sky_check(cub);
+	validator(cub, -1, -1);
+//	int j = -1;
+//	while (cub->map->file[++j])
+//		printf("file = %s\n", cub->map->file[j]);
+//	j = -1;
+//	while (cub->map->map[++j])
+//		printf("map = %s\n", cub->map->map[j]);
+//	player_check(cub, -1, -1);
 }

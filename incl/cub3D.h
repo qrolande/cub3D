@@ -48,20 +48,24 @@ typedef struct  s_plr
 typedef struct  s_map
 {
 	int	        fd;
-	char	    **map;
 	int		    x_len;
 	int		    y_len;
-	char	    *north_wall;
-	char	    *south_wall;
-	char	    *west_wall;
+	int			file_len;
+	int		    num_col;
+	int		    num_com;
+	int         player;
+	int         res;
+	char	    **map;
+	char        **file;
+	char	    start;
+	char	    *space;
+	char 		*temp;
+	char	    *map_sky;
 	char	    *east_wall;
 	char	    *map_floor;
-	char	    *map_sky;
-	char	    start;
-	int		    numb_color;
-	int		    numb_commas;
-	int		    count;
-	char	    *space;
+	char	    *west_wall;
+	char	    *south_wall;
+	char	    *north_wall;
 }               t_map;
 
 typedef struct  s_keys
@@ -83,13 +87,19 @@ typedef struct  s_cub
 }				t_cub;
 
 int     end_game(t_cub *cub);
-void    validator(t_cub *cub);
 int     game_begin(t_cub *cub);
+int     check_line(char *line);
+void    work_with_map(t_cub *cub);
+int     after_line_space(char *line);
 void	parser(char **av, t_cub *cub);
-void    init_mem(t_cub *cub, int flag);
+void    floor_and_sky_check(t_cub *cub);
+void    gnl_work(t_map *map);
 int	    key_press(int keycode, t_cub *cub);
+void    validator(t_cub *cub, int i, int j);
 int	    key_unpress(int keycode, t_cub *cub);
 void    ft_exit(char *str, int flag, t_cub *cub);
-void    texture_and_color_parser(t_cub *cub, int i);
+void    texture_and_color_parser(t_cub *cub, t_map *map, int i);
+
+
 
 #endif
