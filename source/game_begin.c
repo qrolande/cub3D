@@ -1,51 +1,59 @@
 #include "../incl/cub3D.h"
 
-static int check_position(t_cub *cub, double move_y, double move_x)
+static int	check_step(char **mapi, t_cub *cub, double step_x, \
+					double step_y)
 {
-	int i;
-	int j;
-
-	i = cub->plr->pos_y + move_y;
-	j = cub->plr->pos_x + move_x;
-//	i = move_y;
-//	j = move_x;
-	if (cub->map->map[i][j] == '0')
+	step_x = cub->plr->pos_x + step_x;
+	step_y = cub->plr->pos_y + step_y;
+	if (mapi[(int)step_y][(int)step_x] == '0')
 		return (1);
 	return (0);
 }
 
-static void move(t_cub *cub, double move_y, double move_x)
+static void	trav_step(t_cub *cub, double step_x, double step_y)
 {
-	int res_x;
-	int res_y;
-
-	res_x = check_position(cub, 0, move_x);
-	res_y = check_position(cub, move_y, 0);
-	if (res_x)
-		cub->plr->pos_x += move_x;
-	if (res_y)
-		cub->plr->pos_y += move_y;
+	if (check_step(cub->map->map, cub, step_x, 0))
+		cub->plr->pos_x += step_x;
+	if (check_step(cub->map->map, cub, 0, step_y))
+		cub->plr->pos_y += step_y;
 }
 
-static void game_move(t_cub *cub)
+static void	trav_arrow(t_plr *plr, double speed)
 {
-	double move_x;
-	double move_y;
+	double	olddirx;
+	double	oldplanex;
 
-	move_y = cub->plr->dir_y * MOVE_SPEED;
-	move_x = cub->plr->dir_x * MOVE_SPEED;
+	olddirx = plr->dir_x;
+	plr->dir_x = plr->dir_x * cos(speed) - plr->dir_y * sin(speed);
+	plr->dir_y = olddirx * sin(speed) + plr->dir_y * cos(speed);
+	oldplanex = plr->plane_x;
+	plr->plane_x = plr->plane_x * cos(speed) - plr->plane_y * sin(speed);
+	plr->plane_y = oldplanex * sin(speed) + plr->plane_y * cos(speed);
+}
+
+void	game_move(t_cub *cub, double step_x, double step_y)
+{
+	step_x = cub->plr->dir_x * MOVE_SPEED;
+	step_y = cub->plr->dir_y * MOVE_SPEED;
 	if (cub->keys->w == 1)
-		move(cub, move_y, move_x);
+		trav_step(cub, step_x, step_y);
 	if (cub->keys->s == 1)
-		move(cub, -move_y, -move_x);
+		trav_step(cub, -step_x, -step_y);
 	if (cub->keys->d == 1)
-		move(cub, -move_x, move_y);
+		trav_step(cub, -step_y, step_x);
 	if (cub->keys->a == 1)
-		move(cub, move_x, -move_y);
+		trav_step(cub, step_y, -step_x);
+	if (cub->keys->left_arrow == 1)
+		trav_arrow(cub->plr, -ROTATE_SPEED);
+	if (cub->keys->right_arrow == 1)
+		trav_arrow(cub->plr, ROTATE_SPEED);
 }
 
 int game_begin(t_cub *cub)
 {
-	game_move(cub);
+	game_move(cub, 0, 0);
+	create_floor_and_sky(cub, 0, 0);
+	create_walls(cub);
+	mlx_put_image_to_window(cub->win->mlx, cub->win->win, cub->image->img, 0, 0);
 	return (0);
 }

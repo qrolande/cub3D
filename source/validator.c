@@ -4,17 +4,17 @@ static void map_wall_check(t_cub *cub, t_map *map, int i)
 {
 	while (++i < map->y_len)
 	{
-		if (map->map[i][0] != '1' && map->map[i][0] != ' ')
+		if (!(map->map[i][0] == '1' || map->map[i][0] == ' '))
 			ft_exit("Error: walls are not built", 1, cub);
-		if (map->map[i][map->x_len - 1] != '1' && map->map[i][map->x_len - 1] != ' ')
+		if (!(map->map[i][map->x_len - 1] == '1' || map->map[i][map->x_len - 1] == ' '))
 			ft_exit("Error: walls are not built", 1, cub);
 	}
 	i = -1;
 	while (++i < cub->map->x_len)
 	{
-		if (map->map[0][i] != '1' && map->map[0][i] != ' ')
+		if (!(map->map[0][i] == '1'|| map->map[0][i] == ' '))
 			ft_exit("Error: walls are not built", 1, cub);
-		if (map->map[map->y_len - 1][i] != '1' && map->map[map->y_len - 1][i] != ' ')
+		if (!(map->map[map->y_len - 1][i] == '1' || map->map[map->y_len - 1][i] == ' '))
 			ft_exit("Error: walls are not built", 1, cub);
 	}
 }
@@ -32,7 +32,7 @@ static int map_symbol_check(t_map *map, int i, int j)
 static void ft_chess(t_cub *cub, int i, int j)
 {
 	if (cub->map->map[i][j] == ' ' || cub->map->map[i][j] == '\0')
-		ft_exit("Error: invalid kek", 1, cub);
+		ft_exit("Error: invalid map", 1, cub);
 }
 
 static void surround_check(t_cub *cub, int i, int j)
