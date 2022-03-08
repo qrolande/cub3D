@@ -42,7 +42,7 @@ int	get_next_line(int fd, char **line)
 	char		*temp;
 	int			rd;
 
-	if (BUFF_SIZE < 1 || fd < 0 || (read(fd, mmry, 0)) < 0)
+	if (fd < 0 || (read(fd, mmry, 0)) < 0)
 		return (-1);
 	*line = ft_strdup("");
 	if (!(*line))

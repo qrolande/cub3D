@@ -1,6 +1,21 @@
 NAME 		=	cub3D
 
-SRCS  		=	/source/main.c
+SRCS  		=	source/main.c \
+				source/parser.c \
+				source/parser2.c \
+				source/ft_exit.c \
+				source/key_scan.c \
+				source/end_game.c \
+				source/validator.c \
+				source/init_game.c \
+				source/game_begin.c \
+				source/spec_put_in.c \
+				source/player_check.c \
+				source/create_walls.c \
+				source/work_with_map.c \
+				source/floor_and_sky_check.c \
+				source/create_floor_and_sky.c \
+				source/texture_and_color_parser.c
 
 OBJS		=	${SRCS:.c=.o}
 
