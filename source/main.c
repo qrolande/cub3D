@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qrolande <qrolande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:14:39 by qrolande          #+#    #+#             */
+/*   Updated: 2022/03/09 22:34:00 by qrolande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
-static void    init_mem(t_cub *cub)
+static void	init_mem(t_cub *cub)
 {
 	cub->plr = malloc(sizeof(t_plr));
 	cub->win = malloc(sizeof(t_win));
-	cub->keys = malloc(sizeof(t_keys));
 	cub->map = malloc(sizeof(t_map));
 	cub->wall = malloc(sizeof(t_wall));
+	cub->keys = malloc(sizeof(t_keys));
 	cub->image = malloc(sizeof(t_image));
-	if (!cub->plr || !cub->map || !cub->win || !cub->keys || ! cub->wall || !cub->image)
+	if (!cub->plr || !cub->map || !cub->win || !cub->keys
+		|| !cub->wall || !cub->image)
 		ft_exit("Error: can't allocate memory", 1, cub);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_cub cub;
+	t_cub	cub;
 
 	if (ac < 2)
 		ft_exit("Error: not enough arguments", 2, &cub);
@@ -34,5 +47,5 @@ int main(int ac, char **av)
 	}
 	else
 		ft_exit("Error: arguments more than 2", 2, &cub);
-	return  (0);
+	return (0);
 }

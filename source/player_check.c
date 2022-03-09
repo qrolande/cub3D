@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_check.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qrolande <qrolande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:39:02 by qrolande          #+#    #+#             */
+/*   Updated: 2022/03/09 20:39:29 by qrolande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
-void player_gps(t_cub *cub)
+void	player_gps(t_cub *cub)
 {
 	if (cub->map->start == 'N')
 	{
@@ -26,7 +38,7 @@ void player_gps(t_cub *cub)
 	cub->plr->plane_y = cub->plr->dir_x * tan(85 * M_PI / 360);
 }
 
-void player_check(t_cub *cub, int i, int j)
+void	player_check(t_cub *cub, int i, int j)
 {
 	cub->plr->pos_x = 0;
 	cub->plr->pos_y = 0;

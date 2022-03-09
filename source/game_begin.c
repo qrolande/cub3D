@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_begin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akatlyn <akatlyn@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:28:20 by akatlyn           #+#    #+#             */
+/*   Updated: 2022/03/09 20:29:17 by akatlyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
 static int	check_step(char **mapi, t_cub *cub, double step_x, \
@@ -49,11 +61,12 @@ void	game_move(t_cub *cub, double step_x, double step_y)
 		trav_arrow(cub->plr, ROTATE_SPEED);
 }
 
-int game_begin(t_cub *cub)
+int	game_begin(t_cub *cub)
 {
 	game_move(cub, 0, 0);
 	create_floor_and_sky(cub, 0, 0);
 	create_walls(cub);
-	mlx_put_image_to_window(cub->win->mlx, cub->win->win, cub->image->img, 0, 0);
+	mlx_put_image_to_window \
+		(cub->win->mlx, cub->win->win, cub->image->img, 0, 0);
 	return (0);
 }
