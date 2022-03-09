@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qrolande <qrolande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:21:13 by qrolande          #+#    #+#             */
+/*   Updated: 2022/03/09 22:39:55 by qrolande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
-static void other_close(t_cub *cub)
+static void	other_close(t_cub *cub)
 {
 	if (cub->map->east_wall)
 		free(cub->map->east_wall);
@@ -16,28 +28,28 @@ static void other_close(t_cub *cub)
 		free(cub->map->map_floor);
 }
 
-static void free_all(t_cub *cub)
+static void	free_all(t_cub *cub)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (cub->map->file && cub->map->file_len > 0)
 	{
-		while (++i < cub->map->y_len)
+		while (cub->map->file[++i])
 			free(cub->map->file[i]);
 		free(cub->map->file);
 	}
 	i = -1;
-	if (cub->map->map && cub->map->file_len > 0)
+	if (cub->map->map && cub->map->y_len > 0)
 	{
-		while (++i < cub->map->y_len)
+		while (cub->map->map[++i])
 			free(cub->map->map[i]);
 		free(cub->map->map);
 	}
 	other_close(cub);
 }
 
-void    ft_exit(char *str, int flag, t_cub *cub)
+void	ft_exit(char *str, int flag, t_cub *cub)
 {
 	if (flag == 2)
 	{

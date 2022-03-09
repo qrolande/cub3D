@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qrolande <qrolande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:39:41 by qrolande          #+#    #+#             */
+/*   Updated: 2022/03/09 22:28:43 by qrolande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
-static long rgb_converter(t_cub *cub, char *line)
+static long	rgb_converter(t_cub *cub, char *line)
 {
 	char	**tmp;
-	int 	rgb[3];
-	int 	i;
+	int		rgb[3];
+	int		i;
 
 	i = -1;
 	tmp = ft_split(line, ',');
@@ -38,8 +50,8 @@ static void	texture_init(t_cub *cub)
 
 static void	upload_texture(t_cub *cub, char *path, t_image *image)
 {
-	int width;
-	int height;
+	int	width;
+	int	height;
 
 	image->img = mlx_xpm_file_to_image(cub->win->mlx, path, &width, &height);
 	if (!image->img)
@@ -51,7 +63,7 @@ static void	upload_texture(t_cub *cub, char *path, t_image *image)
 	image->bits = image->bits / 8;
 }
 
-static void	 put_texture_in_file(t_cub *cub)
+static void	put_texture_in_file(t_cub *cub)
 {
 	cub->wall->south_texture = malloc(sizeof(t_image));
 	cub->wall->north_texture = malloc(sizeof(t_image));
@@ -70,7 +82,7 @@ void	init_game(t_cub *cub)
 {
 	cub->keys->w = -1;
 	cub->keys->a = -1;
-	cub->keys->s= -1;
+	cub->keys->s = -1;
 	cub->keys->d = -1;
 	cub->keys->left_arrow = -1;
 	cub->keys->right_arrow = -1;

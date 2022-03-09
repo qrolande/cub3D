@@ -1,33 +1,16 @@
-#include "../incl/cub3D.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   spec_put_in.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akatlyn <akatlyn@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:41:24 by akatlyn           #+#    #+#             */
+/*   Updated: 2022/03/09 20:41:32 by akatlyn          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//static unsigned int	*set_color(t_image *image, int x, int y)
-//{
-//	return ((unsigned *)(image->addr + y * image->line_length + x * image->bits));
-//}
-//
-//void	spec_put_in(t_cub *cub, t_vect tmp, t_image *texture, int i)
-//{
-//	t_vect		position;
-//	int			player_x;
-//	int			player_y;
-//	int			start;
-//	int			finish;
-//
-//	position.x = (double)SCALE / tmp.y;
-//	start = (RES_Y - (int)tmp.y) / 2;
-//	if (start < 0)
-//		start = 0;
-//	finish = RES_Y - start;
-//	player_x = (int)((double)SCALE * tmp.x);
-//	position.y = (start + ((int)tmp.y - RES_Y) * 0.5) * position.x;
-//	while (start < finish)
-//	{
-//		player_y = (int)position.y & (SCALE - 1);
-//		ft_miracle(cub, i, start, *set_color(texture, player_x, player_y));
-//		position.y += position.x;
-//		start++;
-//	}
-//}
+#include "../incl/cub3D.h"
 
 static unsigned int	*set_color(t_image *img, int x, int y)
 {
@@ -40,7 +23,7 @@ void	put_tex_stripe(t_cub *cub, int x, t_vect trash, t_image *tex)
 	int			p_y;
 	int			start;
 	int			finish;
-	t_vect  	step_pos;
+	t_vect		step_pos;
 
 	step_pos.x = (double)SCALE / trash.y;
 	start = (RES_Y - (int)trash.y) / 2;

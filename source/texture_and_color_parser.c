@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_and_color_parser.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qrolande <qrolande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:27:21 by qrolande          #+#    #+#             */
+/*   Updated: 2022/03/09 20:30:31 by qrolande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
-static char *value_work(char *str, t_cub *cub)
+static char	*value_work(char *str, t_cub *cub)
 {
 	int	i;
 	int	len;
@@ -18,7 +30,7 @@ static char *value_work(char *str, t_cub *cub)
 	return (ft_strdup(&str[i]));
 }
 
-static char *rgb_work(char *str)
+static char	*rgb_work(char *str)
 {
 	int	i;
 
@@ -30,15 +42,15 @@ static char *rgb_work(char *str)
 	return (ft_strdup(&str[i]));
 }
 
-static void if_not_value(t_cub *cub)
+static void	if_not_value(t_cub *cub)
 {
- 	if (!cub->map->north_wall || !cub->map->south_wall || \
- 	!cub->map->east_wall ||!cub->map->west_wall || \
- 	!cub->map->map_sky || !cub->map->map_floor)
- 		ft_exit("Error: wrong map", 1, cub);
+	if (!cub->map->north_wall || !cub->map->south_wall \
+		|| !cub->map->east_wall ||!cub->map->west_wall \
+		|| !cub->map->map_sky || !cub->map->map_floor)
+		ft_exit("Error: wrong map", 1, cub);
 }
 
-void    texture_and_color_parser(t_cub *cub, t_map *map, int i)
+void	texture_and_color_parser(t_cub *cub, t_map *map, int i)
 {
 	while (map->file[++i])
 	{

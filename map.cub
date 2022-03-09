@@ -1,13 +1,14 @@
-NO ./sprites/wall4.xpm
-SO ./sprites/wall1.xpm
-WE ./sprites/wall3.xpm
-EA ./sprites/wall5.xpm
+NO ./sprites/north.xpm
+SO ./sprites/south.xpm
+WE ./sprites/west.xpm
+EA ./sprites/east.xpm
 
-F 0,5,73
+F 208,176,132
 C 142,200,216
 
 111111
 100001
 10N001
-100101
+100001
 111111
+

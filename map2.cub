@@ -1,7 +1,7 @@
-WE ./sprites/wall1.xpm
-EA ./sprites/wall2.xpm
-NO ./sprites/wall3.xpm
-SO ./sprites/wall8.xpm
+WE ./sprites/bluewall.xpm
+EA ./sprites/emeral_wall.xpm
+NO ./sprites/redwall.xpm
+SO ./sprites/ruine_wall.xpm
 
 F 0,75,73
 C 142,200,216
@@ -37,3 +37,6 @@ C 142,200,216
 11110111 1111111 1111111111111
 100001
 111111
+
+
+

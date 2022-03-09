@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   floor_and_sky_check.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qrolande <qrolande@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 20:30:47 by qrolande          #+#    #+#             */
+/*   Updated: 2022/03/09 20:31:33 by qrolande         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incl/cub3D.h"
 
-static void check_string_second(char *str, t_cub *cub, int j)
+static void	check_string_second(char *str, t_cub *cub, int j)
 {
-	char    *tmp;
-	int     res;
+	char	*tmp;
+	int		res;
 
 	res = ft_strlen(str) - j;
 	tmp = ft_substr(str, j, res);
@@ -21,10 +33,10 @@ static void check_string_second(char *str, t_cub *cub, int j)
 		ft_exit("Error: wrong color number", 1, cub);
 }
 
-static void check_string(char *str, t_cub *cub, int i, int j)
+static void	check_string(char *str, t_cub *cub, int i, int j)
 {
-	char    *tmp;
-	int     res;
+	char	*tmp;
+	int		res;
 
 	while (str[++i])
 	{
@@ -50,7 +62,7 @@ static void check_string(char *str, t_cub *cub, int i, int j)
 	check_string_second(str, cub, j);
 }
 
-void    floor_and_sky_check(t_cub *cub)
+void	floor_and_sky_check(t_cub *cub)
 {
 	cub->map->num_col = 0;
 	cub->map->num_com = 0;
